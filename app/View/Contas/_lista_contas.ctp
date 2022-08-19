@@ -1,7 +1,7 @@
 <?php
 
 $tableHeaders = [];
-$tableHeaders[]=  $this->Paginator->sort('Pessoa.nome', 'Name');
+$tableHeaders[]=  $this->Paginator->sort('Pessoa.nome', 'Nome');
 $tableHeaders[]= 'CPF';
 $tableHeaders[]= $this->Paginator->sort('Conta.numero_conta', 'Número da Conta');
 $tableHeaders[]= 'Editar';
@@ -11,7 +11,7 @@ $tableCells = [];
 if( !empty($dados)){
     foreach ($dados as $key => $dado){
         $tableCells[$key][] = Hash::get($dado, 'Pessoa.nome', '-');
-        $tableCells[$key][] = Hash::get($dado, 'Pessoa.cpf', '-');
+        $tableCells[$key][] = Hash::get($dado, 'Pessoa.cpf_formatado', '-');
         $tableCells[$key][] = Hash::get($dado, 'Conta.numero_conta', '-');
         $tableCells[$key][] = $this->Html->link('editar',['controller' => 'contas','action' => 'editar', Hash::get($dado, 'Conta.id')]);
         $tableCells[$key][] = $this->Form->postLink('Remover', [ 'action' => 'delete', Hash::get($dado, 'Conta.id')], ['confirm' => ' Deseja realmente deletar o registro?']);

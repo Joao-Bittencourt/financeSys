@@ -11,7 +11,7 @@ $tableCells = [];
 if( !empty($dados)){
     foreach ($dados as $key => $dado){
         $tableCells[$key][] = Hash::get($dado, 'Pessoa.nome', '-');
-        $tableCells[$key][] = Hash::get($dado, 'Pessoa.cpf', '-');
+        $tableCells[$key][] = Hash::get($dado, 'Pessoa.cpf_formatado', '-');
         $tableCells[$key][] = Hash::get($dado, 'Pessoa.endereco', '-');
         $tableCells[$key][] = $this->Html->link('editar',['controller' => 'pessoas', 'action' => 'editar', Hash::get($dado, 'Pessoa.id')]);
         $tableCells[$key][] = $this->Form->postLink('Remover', [ 'action' => 'delete', Hash::get($dado, 'Pessoa.id')], ['confirm' => ' Deseja realmente deletar o registro?']);

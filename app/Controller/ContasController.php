@@ -5,12 +5,14 @@ App::uses('AppController', 'Controller');
 class ContasController extends AppController {
 
     public $components = ['Paginator', 'Flash'];
-
+    
     public function index() {
-      
-        $this->set('dados', $this->Paginator->paginate());
+
+        $this->Conta->recursive = 0;
+     
+        $this->set('dados', $this->Paginator->paginate('Conta'));
         $this->set('pessoas', $this->Conta->Pessoa->find('list', ['fields' => ['Pessoa.id', 'Pessoa.nome_cpf']]));
-        
+
         if ($this->request->is('post')) {
             $this->cadastrar();
         }
@@ -22,7 +24,7 @@ class ContasController extends AppController {
     }
 
     public function cadastrar() {
-        
+
         $dadosSalvar = (array) $this->request->data;
 
         if ($this->Conta->saveAll($dadosSalvar, ['validate' => 'first'])) {
@@ -50,9 +52,9 @@ class ContasController extends AppController {
         $this->set('title', 'Editar Conta');
 
         if ($this->request->is('put')) {
-            
+
             $dadosSalvar = (array) $this->request->data;
-            
+
             if ($this->Conta->saveAll($dadosSalvar, ['validate' => 'first'])) {
                 $this->Flash->success(__('Dados salvos com sucesso.'));
                 return $this->redirect(['controller' => 'contas', 'action' => 'index']);
@@ -61,22 +63,22 @@ class ContasController extends AppController {
                 return false;
             }
         }
-        
+
         return true;
     }
 
     public function delete($id = null) {
-        
+
         $this->request->allowMethod('post', 'delete');
-        
+
         if (!$this->Conta->exists($id)) {
             $this->Flash->error(__('Conta não encontrada.'));
             return $this->redirect(['action' => 'index']);
         }
-        
+
 
         $deletarValido = $this->Conta->valida_reqistros_deletar($id);
-        
+
         if ($deletarValido) {
             if ($this->Conta->delete($id)) {
                 $this->Flash->success(__('Dado deletado com sucesso.'));

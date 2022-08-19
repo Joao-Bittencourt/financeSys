@@ -1,21 +1,30 @@
-Este sistema consiste em desenvolver um sistema, conforme especificado nos protótipos abaixo.
+Este projeto consiste em desenvolver um sistema, conforme especificado nos protótipos abaixo.
 
 **Cadastro de pessoa**
 
-![image-pessoa](imagens/pessoa.png)
+![image-pessoa](docs/imagens/pessoa.png)
 
 **Cadastro de conta**
 
-![image-conta](imagens/conta.png)
+![image-conta](docs/imagens/conta.png)
 
 **Cadastro de movimentação**
 
-![image-movimentacao](imagens/movimentacao.png)
-
-
+![image-movimentacao](docs/imagens/movimentacao.png)
 
 
 
 ## Configuração do Projeto
 
-em desenv
+Dump da estrutura do banco de dados esta em /docs
+
+
+
+## Requerimentos
+
+- PHP >= 5.6
+
+- MySQL
+
+- Composer
+

@@ -23,7 +23,7 @@
         <div class="row mb-3">
             <label for="tipo_movimentacao" class="col-sm-2 col-form-label">Depositar / Sacar</label>
             <div class="col-sm-5">
-                <?php echo $this->Form->input('Movimentacao.tipo_movimentacao', ['label' => false, 'options' => ['C' => 'Depositar', 'D' => 'Sacar'], 'empty' => '- selecione - ', 'class' => 'form-control', 'required' => false]);?>
+                <?php echo $this->Form->input('Movimentacao.tipo_movimentacao', ['label' => false, 'options' => ['C' => 'Depositar', 'D' => 'Retirar'], 'empty' => '- selecione - ', 'class' => 'form-control', 'required' => false]);?>
             </div>
         </div>
     </div>
