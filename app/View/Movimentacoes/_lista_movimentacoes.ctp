@@ -1,18 +1,18 @@
 <?php
 
 $tableHeaders = [];
-$tableHeaders[]=  $this->Paginator->sort('Movimentacao.dt_movimentacao', 'Data');
-$tableHeaders[]= $this->Paginator->sort('Movimentacao.valor', 'Valor');
+$tableHeaders[]=  $this->Paginator->sort('Movimentacao.dt_movimento', 'Data');
+$tableHeaders[]= $this->Paginator->sort('Movimentacao.valor_int', 'Valor');
 
 $tableCells = [];
 if( !empty($dados)){
     foreach ($dados as $key => $dado){
-        $tableCells[$key][] = Hash::get($dado, 'Movimentacao.dt_movimento', '-');
+        $tableCells[$key][] = Hash::get($dado, 'Movimentacao.dt_movimento_formatado', '-');
         
-        $valor = Hash::get($dado, 'Movimentacao.valor', '-');
+        $valor = Hash::get($dado, 'Movimentacao.valor_formatado', '-');
         switch (Hash::get($dado, 'Movimentacao.tipo_movimentacao')){
             case 'D':
-                $tableCells[$key][] = ['- '. $valor, ['class' => 'text-danger']];
+                $tableCells[$key][] = [$valor, ['class' => 'text-danger']];
                 break;
             case 'C':
             default :

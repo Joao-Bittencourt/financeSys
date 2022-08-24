@@ -1,3 +1,5 @@
+[![.github/workflows/php.yml](https://github.com/Joao-Bittencourt/financeSys/actions/workflows/php.yml/badge.svg)](https://github.com/Joao-Bittencourt/financeSys/actions/workflows/php.yml)
+
 Este projeto consiste em desenvolver um sistema, conforme especificado nos protótipos abaixo.
 
 **Cadastro de pessoa**

@@ -13,7 +13,6 @@ class Movimentacao extends AppModel {
             'ClassName' => 'Conta'
         ]
     ];
-    
     public $virtualFields = [
         'saldo' => "(SELECT
             SUM(
@@ -24,7 +23,22 @@ class Movimentacao extends AppModel {
             )
             FROM movimentacoes 
             WHERE Movimentacao.conta_id = movimentacoes.conta_id
-        )"
+        )",
+        'dt_movimento_formatado' => "(DATE_FORMAT(Movimentacao.dt_movimento, '%d/%m/%Y %H:%i:%s'))",
+        'valor_int' => "
+            (CASE WHEN Movimentacao.tipo_movimentacao = 'D'
+                THEN (Movimentacao.valor *-1)
+                ELSE Movimentacao.valor
+            END)",
+        'valor_formatado' => "
+            FORMAT(
+                (CASE WHEN Movimentacao.tipo_movimentacao = 'D'
+                    THEN (Movimentacao.valor *-1)
+                    ELSE Movimentacao.valor
+                END),
+                2,
+                'de_DE'
+            )",
     ];
     public $validate = [
         'dt_movimento' => [
@@ -74,7 +88,7 @@ class Movimentacao extends AppModel {
     }
 
     public function valida_tipo_movimentacao($value) {
-        
+
         $tipo_movimentacao = Hash::get($value, 'tipo_movimentacao');
         if (!in_array($tipo_movimentacao, ['C', 'D'])) {
             return false;
@@ -84,7 +98,7 @@ class Movimentacao extends AppModel {
     }
 
     public function valida_valor_saldo() {
-        
+
         $tipo_movimentacao = Hash::get($this->data, 'Movimentacao.tipo_movimentacao');
 
         if ($tipo_movimentacao == 'D') {
