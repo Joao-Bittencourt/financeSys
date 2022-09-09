@@ -60,20 +60,15 @@ class Conta extends AppModel {
         ]
     ];
 
-    public function busca($type, $params = []) {
+    public function buscaListaContaSaldo() {
 
-        if ($type = 'conta_numero_saldo') {
+        $this->virtualFields['conta_numero_saldo'] = [];
+        $options = [];
 
-            $this->virtualFields['conta_numero_saldo'] = 
-            $options = [];
-            
-            $options['fields'][] = 'Conta.id';
-            $options['fields'][] = 'Conta.conta_saldo';
+        $options['fields'][] = 'Conta.id';
+        $options['fields'][] = 'Conta.conta_saldo';
 
-            return $this->find('list', $options);
-        }
-        
-        return false;
+        return $this->find('list', $options);
     }
 
     public function valida_reqistros_deletar($id = null) {
@@ -82,10 +77,16 @@ class Conta extends AppModel {
             return false;
         }
 
-        $contaMovimentacaoQuantidade = $this->Movimentacao->find('count', ['conditions' => ['Movimentacao.conta_id' => $id]]);
+        $contaMovimentacaoQuantidade = $this->Movimentacao->find('count', [
+            'conditions' => [
+                'Movimentacao.conta_id' => $id
+            ]
+        ]);
+        
         if ($contaMovimentacaoQuantidade > 0) {
             return false;
         }
+        
         return true;
     }
 

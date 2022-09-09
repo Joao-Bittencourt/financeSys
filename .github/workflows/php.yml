@@ -53,6 +53,17 @@ jobs:
     
        
     - name: Run PHPUnit
-      run: |     
-       chmod +x app/Console/cake  
-       app/Console/cake test app All --stderr --verbose
+      
+      run: | 
+        chmod +x app/Console/cake 
+        if [[ ${{ matrix.php-version }} == '7.4' ]]; then
+           app/Console/cake test app All --stderr --verbose --coverage-clover=coverage.xml
+        else
+           app/Console/cake test app All --stderr --verbose
+        fi
+       
+       
+       
+    - name: Code Coverage Report
+      if: matrix.php-version == '7.4' 
+      uses: codecov/codecov-action@v3

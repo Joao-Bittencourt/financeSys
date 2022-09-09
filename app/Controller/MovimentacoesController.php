@@ -11,7 +11,7 @@ class MovimentacoesController extends AppController {
         $this->set('dados', $this->Paginator->paginate());
         $this->set('dados_total', $this->Movimentacao->find('first', ['fields' => 'Movimentacao.saldo']));
         $this->set('pessoas', $this->Movimentacao->Pessoa->find('list', ['fields' => ['Pessoa.id', 'Pessoa.nome_cpf']]));
-        $this->set('contas', $this->Movimentacao->Conta->busca('conta_numero_saldo'));
+        $this->set('contas', $this->Movimentacao->Conta->buscaListaContaSaldo());
        
         if ($this->request->is('post')) {
             $this->cadastrar();

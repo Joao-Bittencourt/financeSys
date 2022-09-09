@@ -66,7 +66,7 @@ class Pessoa extends AppModel {
         ],
         'endereco' => [
             'notBlank' => [
-                'rule' => ['notBlank'],
+                'rule' => 'notBlank',
                 'message' => 'Campo endereço deve ser preenchido.',
             ],
         ]
@@ -86,7 +86,7 @@ class Pessoa extends AppModel {
         $pessoaNome = Hash::get($value, 'nome');
         if (is_numeric(filter_var($pessoaNome, FILTER_SANITIZE_NUMBER_INT))) {
             return false;
-        };
+        }
 
         return true;
     }
